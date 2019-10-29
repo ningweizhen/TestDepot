@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .mainbox{
+            flex: 1;
+            overflow-y: auto;
+            overflow-x:hidden;
+        }
+        .card:last-of-type .q{
+            margin-bottom: 3rem;
+        }
+        .card-footer{
+            margin-bottom: 1rem;
+        }
+        .q{
+            display: flex;
+            justify-content:flex-end;
+        }
+        .q1{
+            margin-right: 0.5rem;
+            width: 3rem;
+            height:3rem;
+            background-color: rgb(15, 255, 47);
+            color: rgb(0, 204, 255);
+            border:none;
+            border-radius: 2rem;
+            font-size: 1rem;
+        }
+        .back{
+            background-color: salmon;
+        }
+    </style>
+    <script src="vue.js"></script>
+    <script>
+        window.onload = () =>{
+            new Vue({
+                el:".content",
+                data:{
+                    card:[
+                        {id:0 ,top:"111111111111111" ,mid:"卡中1" , btm :"卡第1" , finish:false},
+                        {id:1 ,top:"222222222222222" ,mid:"卡中2" , btm :"卡第2" , finish:false},
+                        {id:2 ,top:"333333333333333" ,mid:"卡中3" , btm :"卡第3" , finish:false},
+                        {id:3 ,top:"444444444444444" ,mid:"卡中4" , btm :"卡第4" , finish:false},
+                        {id:4 ,top:"555555555555555" ,mid:"卡中5" , btm :"卡第5" , finish:false},
+                        {id:5 ,top:"666666666666666" ,mid:"卡中6" , btm :"卡第6" , finish:false}
+                    ]
+
+                },
+                methods: {
+                    clickq(id){
+                        this.card = this.card.filter(item => {
+                          if(item.id !== id){
+                              return true
+                          }
+                          return false
+                        })
+                    },
+                    alert1(){
+                      alert(1)
+                    }
+                }
+            })  
+        }
+    </script>
+</head>
+<body style="overflow: auto;">
+        <header class="bar bar-nav">
+                <button class="button button-link button-nav pull-left">
+                    <span class="icon icon-left"></span>
+                    返回
+                </button>
+                <button class="button button-link button-nav pull-right">
+                    下一步
+                    <span class="icon icon-right"></span>
+                </button>
+               
+                <h1 class="title">标题</h1>
+        </header>
+<br>
+<header class="bar bar-nav" >
+        <h1 class="title">列表卡片</h1>
+      </header>
+      <div class="content" style="top:1rem">
+        <div class="list-block cards-list">
+          <ul>
+                <li class="card" v-for="item in card">
+                        <div class="card-header">{{item.top}}</div>
+                        <div class="card-content">
+                          <div class="card-content-inner">{{item.mid}}</div>
+                        </div>
+                        <div class="card-footer">{{item.btm}}</div>
+                        <div class="q">
+                           <button :class="['q1' , (item.finish?'back':'')]" @click="item.finish = !item.finish">√</button>
+                        <button class="q1" @click="clickq(item.id)">×</button> 
+                        </div>
+                    </li>
+          </ul>
+        </div>
+      </div>
+
+        <nav class="bar bar-tab" >
+                <a class="tab-item external" href="#">
+                  <span class="icon icon-home"></span>
+                  <span class="tab-label">首页</span>
+                </a>
+                <a class="tab-item external" href="#">
+                  <span class="icon icon-me"></span>
+                  <span class="tab-label">我的</span>
+                  <span class="badge">955</span>
+                </a>
+                <a class="tab-item external" href="#">
+                  <span class="icon icon-star"></span>
+                  <span class="tab-label">收藏夹</span>
+                </a>
+                <a class="tab-item external active" href="#">
+                  <span class="icon icon-cart"></span>
+                  <span class="tab-label">购物车</span>
+                </a>
+                <a class="tab-item external" href="#" @click="alert1">
+                  <span class="icon icon-settings"></span>
+                  <span class="tab-label ">设置</span>
+                </a>
+              </nav>
+</body>
+</html>

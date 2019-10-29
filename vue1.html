@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        li{
+            width: 100px;
+            height: 199px;
+            background-color: darkblue;
+        }
+        .a{
+            width: 200px;
+            height: 300px;
+            background-color: saddlebrown;
+        }
+        .red{
+            background-color: red;
+        }
+        .big{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<script>
+    window.onload = () => {
+        // Vue.config.keyCodes.liqiang = 81;
+        new Vue({
+            el:".div1",
+            data:{
+                activeindex:1,
+                obj:{
+                    name:"李强",
+                    sex:"男",
+                    age:22,
+                },
+                obj1:{
+                    color:"red",
+                    big:true
+                },
+                btns:[
+                    
+                    {"id":1,"title":"btn1"},
+                    {"id":2,"title":"btn2"},
+                    {"id":3,"title":"btn3"}
+            ],
+            
+            },  
+                methods: {
+                    up(e){
+                        alert(e.target.value)
+                    },
+                    click:(e) =>{
+                        alert("ss");
+                        // e.stopPropagation();
+                        
+                    },
+                    click1(){
+                        alert("11")
+                    }
+                },
+            
+        })
+    }
+</script>
+<body>
+    <div class="div1">
+        <ul>
+            <span>{{obj.age}}</span>
+            <button v-on:click="++obj.age">++</button>
+            <ul class="a" @click="click1"> <li v-on:click.stop="click">1</li></ul>
+            <input type="text" v-model="obj.name" @keyup.81="up">
+            <p v-bind:class="[obj1.color,(obj1.big?'big':'')]">111</p>
+            <button
+                :class="['btn','btn-default',(activeindex===btn.id?'btn-danger':'')]"
+                v-for="btn in btns"
+                @click="activeindex=btn.id"
+            >{{btn.title}}</button>
+        </ul>
+    </div>
+</body>
+</html>
